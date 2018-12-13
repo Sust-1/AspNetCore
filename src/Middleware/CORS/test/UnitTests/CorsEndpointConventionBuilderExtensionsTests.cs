@@ -28,7 +28,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             addCorsPolicy(endpointModel);
             var endpoint = endpointModel.Build();
 
-            var metadata = endpoint.Metadata.GetMetadata<ICorsPolicyMetadata>();
+            var metadata = endpoint.Metadata.GetMetadata<IEnableCorsAttribute>();
             Assert.NotNull(metadata);
             Assert.Equal("TestPolicyName", metadata.PolicyName);
         }

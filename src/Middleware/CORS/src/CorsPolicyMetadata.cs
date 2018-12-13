@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Microsoft.AspNetCore.Cors
 {
+    /// <summary>
+    /// Metadata that provides a CORS policy.
+    /// </summary>
     public class CorsPolicyMetadata : ICorsPolicyMetadata
     {
         public CorsPolicyMetadata(CorsPolicy policy)
@@ -12,13 +15,9 @@ namespace Microsoft.AspNetCore.Cors
             Policy = policy;
         }
 
-        public CorsPolicyMetadata(string policyName)
-        {
-            PolicyName = policyName;
-        }
-
+        /// <summary>
+        /// The policy which needs to be applied.
+        /// </summary>
         public CorsPolicy Policy { get; }
-
-        public string PolicyName { get; }
     }
 }

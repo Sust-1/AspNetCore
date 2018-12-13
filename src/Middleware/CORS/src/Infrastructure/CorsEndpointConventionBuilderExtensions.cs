@@ -28,7 +28,7 @@ namespace Microsoft.AspNetCore.Builder
 
             builder.Apply(endpointBuilder =>
             {
-                endpointBuilder.Metadata.Add(new CorsPolicyMetadata(policyName));
+                endpointBuilder.Metadata.Add(new EnableCorsAttribute(policyName));
             });
             return builder;
         }

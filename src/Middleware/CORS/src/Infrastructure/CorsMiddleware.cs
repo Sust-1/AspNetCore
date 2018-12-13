@@ -131,10 +131,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             // CORS policy resolution rules:
             //
             // 1. If there is an endpoint with IDisableCorsAttribute then CORS is not run
-            // 2. If there is an endpoint with ICorsPolicyMetadata then use its policy and name
-            // 3. If there is an endpoint with IEnableCorsAttribute that has a policy name then
+            // 2. If there is an endpoint with ICorsPolicyMetadata then use its policy or if
+            //    there is an endpoint with IEnableCorsAttribute that has a policy name then
             //    fetch policy by name, prioritizing it above policy on middleware
-            // 4. If there is no policy on middleware then use name on middleware
+            // 3. If there is no policy on middleware then use name on middleware
 
             // Flag to indicate to other systems, e.g. MVC, that CORS middleware was run for this request
             context.Items[CorsMiddlewareInvokedKey] = true;
@@ -154,7 +154,7 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
             var policyName = _corsPolicyName;
             if (corsMetadata is ICorsPolicyMetadata corsPolicyMetadata)
             {
-                policyName = corsPolicyMetadata.PolicyName;
+                policyName = null;
                 corsPolicy = corsPolicyMetadata.Policy;
             }
             else if (corsMetadata is IEnableCorsAttribute enableCorsAttribute &&
